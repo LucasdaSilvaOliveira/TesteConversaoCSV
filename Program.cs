@@ -58,7 +58,27 @@ try
         }
         else
         {
-            Console.WriteLine("A tabela já existe no banco de dados.");
+
+            var dados = csv.GetRecords<PGFN>().ToList();
+
+            string createData = $"INSERT INTO {tableName} ({string.Join(", ", columnNames)}) VALUES ";
+
+            foreach (var dado in dados.Take(5))
+            {
+                createData += $"('{dado.CpfCnpj}', '{dado.TipoPessoa}', '{dado.TipoDevedor}', " +
+                    $"'{dado.NomeDevedor}', '{dado.UfDevedor}', '{dado.UnidadeResponsável}', " +
+                    $"'{dado.NumeroInscricao}', '{dado.TipoSituacaoInscricao}', " +
+                    $"'{dado.SituacaoInscricao}', '{dado.TipoCredito}', " +
+                    $"'{dado.DataInscricao}', '{dado.IndicadorAjuizado}', '{dado.ValorConsolidado}'), ";
+            }
+
+            createData = createData.TrimEnd(',', ' '); // Remover a vírgula extra no final
+
+            MySqlCommand createTableCommand = new MySqlCommand(createData, connection);
+            createTableCommand.ExecuteNonQuery();
+
+
+            Console.WriteLine("Dados inserido com sucesso!");
         }
     }
 
