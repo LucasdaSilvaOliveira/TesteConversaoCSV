@@ -1,0 +1,11 @@
+{
+  "exclude": [
+    "**/bin",
+    "**/bower_components",
+    "**/jspm_packages",
+    "**/node_modules",
+    "**/obj",
+    "**/platforms"
+  ],
+  "ConnectionString": "Server=localhost;Database=testecsv;User=root;Password=presente;"
+}
