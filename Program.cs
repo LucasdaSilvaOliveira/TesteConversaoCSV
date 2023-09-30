@@ -36,7 +36,7 @@ try
         string[] columnNames = csv.HeaderRecord;
 
         // Verifique se a tabela já existe no banco de dados
-        string tableName = "Empresas";
+        string tableName = "Estabelecimentos";
         bool tableExists = CheckIfTableExists(connection, tableName);
 
         if (!tableExists)
